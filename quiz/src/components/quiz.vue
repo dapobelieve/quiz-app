@@ -43,26 +43,57 @@
         </v-flex>
         <v-flex xs12 md4>
           <v-card class="px-2 py-2">
-            <v-card v-for="x in 5" :key="x"  tile color="red">
-              <v-card-text>🎈</v-card-text>
+            <v-card v-for="(x, index) in quiz" :key="x.id"  tile color="" cursor>
+              <v-card-text>{{ x }}</v-card-text>
               <v-divider></v-divider>
             </v-card>
-
           </v-card>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
         <v-flex xs8>
           <v-btn color="success">Submit</v-btn>
-          <!-- <router-link :to="{name: 'home'}">Home</router-link> -->
         </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
 <script>
+  import { mapActions, mapGetters } from 'vuex'
   export default {
-    //
+    data () {
+      return {
+        pages: 0,
+        pageStart: 0,
+      }
+    },
+    computed: {
+      newData () {
+        const start = this.pageStart * 1,
+              end   = start + 1
+        return this.quiz.slice(start, end);
+      },
+      ...mapGetters({
+        name: 'getName',
+        quiz: 'getQuiz'
+      })
+    },
+    methods: {
+      ...mapActions({
+        getQuestions: 'getUserQuestions'
+      })
+    },
+    mounted () {
+      let lent = this.quiz.length;
+      this.pages = Math.ceil(lent/1)
+
+    },
+    created() {
+      // console.log('App Loaded Quiz')
+      this.getQuestions({
+        url: this.$baseUrl
+      })
+    }
   }
 </script>
 <style>

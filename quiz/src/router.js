@@ -16,8 +16,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/quiz',
+      name: 'quiz',
       component: Quiz
     },
     {

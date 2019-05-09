@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <!-- <v-navigation-drawer app></v-navigation-drawer> -->
-    <!-- <v-toolbar app></v-toolbar> -->
     <v-content>
       <v-container fluid>
         <router-view></router-view>
@@ -10,7 +8,21 @@
     <!-- <v-footer app></v-footer> -->
   </v-app>
 </template>
-
+<script>
+  import { mapActions } from 'vuex'
+  export default {
+    methods: {
+      ...mapActions({
+        setState: 'setAppState'
+      })
+    },
+    created() {
+      //i attempt to set the app state if 
+      //data is in LS, useful for page refresh situations
+      this.setState()
+    }
+  }
+</script>
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

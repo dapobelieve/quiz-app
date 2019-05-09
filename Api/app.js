@@ -1,25 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// import db from './db/db';
 const fs = require('fs')
 var cors = require('cors')
 const app = express();
-const DB = './db/answers.json';
+const ANS = './db/answers.json';
+const QUE = './db/questions.json';
 
 app.use(cors())
 //parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-//get all todos
-app.get('/api/v1/todos', (req, res) => {
-    res.status(200).send({
-        success: true,
-        message: 'Todos retrieved',
-        data: db
-    })
-});
 
 //create new user here
 app.post('/api/v1/create-user', (req, res) => {
@@ -36,7 +26,7 @@ app.post('/api/v1/create-user', (req, res) => {
     }
 
     //readIn file and check if user email exits
-    fs.readFile(DB, (err, data) => {
+    fs.readFile(ANS, (err, data) => {
         var obj = JSON.parse(data);   
 
         let user = {
@@ -55,7 +45,7 @@ app.post('/api/v1/create-user', (req, res) => {
 
         obj = JSON.stringify(obj)
 
-        fs.writeFile(DB, obj, 'utf8')
+        fs.writeFile(ANS, obj, 'utf8')
          
         
         res.status(201).send({
@@ -63,7 +53,25 @@ app.post('/api/v1/create-user', (req, res) => {
             message: 'Answers Retrieved',
             user
         })
+    })   
+})
+
+//get quiz questions
+app.get('/api/v1/get-quiz', (req, res) => {
+    //open queestions.json and retrieve quiz
+    fs.readFile(QUE, (err, data) => {
+        let obj = JSON.parse(data)
+        let quiz = obj.questions
+
+        return res.status(200)
+                .send({
+                    success: true,
+                    message: "Questions Set",
+                    quiz
+                })
+
     })
+
     
 })
 

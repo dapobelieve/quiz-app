@@ -45,6 +45,7 @@
 </template>
 <script>
   import axios from 'axios'
+  import { mapActions } from 'vuex'
   export default {
     data () {
       return {
@@ -57,15 +58,24 @@
       }      
     },
     methods: {
+      ...mapActions({
+        createUser: 'registerUser'
+      }),
       handleSubmit () {
-        axios.post(`${this.$baseUrl}create-user`, this.form)
+        this.createUser({
+          payLoad: this.form,
+          context: this,
+          url: this.$baseUrl
+        })
         .then(response => {
+          this.$router.push({
+            name: 'quiz'
+          })
           console.log(response.data)
         })
         .catch(error => {
           console.log(error.response.data)
         })
-        // console.log('submitting')
       }
     }
   }
