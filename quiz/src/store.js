@@ -38,7 +38,12 @@ export default new Vuex.Store({
             }
         })
         
-        localStorage.setItem('quiz', JSON.stringify(state))
+        localStorage.setItem('quiz', JSON.stringify(state.answers))
+    },
+    updateUserData(state, {response}) {
+        console.log(response.data.user)
+        state.userData = response.data.user
+        // localStorage.setItem('userData', JSON.stringify(payLoad))
     }
   },
   actions: {
@@ -69,10 +74,23 @@ export default new Vuex.Store({
     },
     answerQuestion({commit}, {id, answer}) {
         commit('answerQuestion', {id, answer})
+    },
+    submitQuiz({commit}, { url, answers, userId }) {
+        return axios.post(`${url}submit`, {
+            id: userId,
+            answers
+        })
+        .then(response => {
+            commit('updateUserData', {response})
+            return Promise.resolve(response)
+        })
+        .catch(error => {
+            return Promise.reject(error)
+        })
     }
   },
   getters: {
-    getName (state) {
+    getUser (state) {
         return state.userData
     },
     getQuiz (state) {

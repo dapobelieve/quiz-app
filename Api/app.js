@@ -35,7 +35,6 @@ app.post('/api/v1/create-user', (req, res) => {
             email,
             quiz: {
                 count: quizQuestions,
-                questions: [],
                 answers: [],
                 score: 0
             }
@@ -79,19 +78,45 @@ app.get('/api/v1/get-quiz/:n', (req, res) => {
 
 //process results and compute answers
 app.post('/api/v1/submit', (req, res) => {
+    let userid  = req.body.id;
     let answers = req.body.answers;
     let numberOfQuestions = answers.length;
     let score = 0;
+    let user;
 
     answers.map(x => {
         if(x.choice === x.answer)
             score++;
     });
-
     let percentage = ((score / numberOfQuestions) * 100);
 
-    console.log(percentage.toFixed(1));
+    fs.readFile(ANS, (err, data) => {
+      let obj = JSON.parse(data);
+      obj.answers.map(x => {
+        if(x.id === userid) {
+          user = x;
+        }
+      })
+      
+      user.quiz.answers = answers;
+      user.quiz.score = percentage.toFixed(1);
+      obj.answers.map(el => {
+        if (el.id === user.id) 
+          el = user
+      })
 
+      obj = JSON.stringify(obj)
+      fs.writeFile(ANS, obj, 'utf8');
+      
+      return res.status(200)
+                .send({
+                  success: true,
+                  message: "",
+                  user
+                });
+      
+
+    })
 })
 
 

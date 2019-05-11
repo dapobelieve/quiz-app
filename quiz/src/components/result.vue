@@ -7,8 +7,8 @@
             <v-card-title primary-title class="heading">
               <div class="result-area">
                 <h4 class="title ">You Scored</h4>
-                <p class="display-4">30%</p>
-                <v-btn color="darken-1">Try Again</v-btn>
+                <p class="display-4">{{user.quiz.score}}%</p>
+                <v-btn :to="{name: 'quiz'}" color="darken-1">Try Again</v-btn>
               </div>
             </v-card-title>
           </v-card>
@@ -18,8 +18,16 @@
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   export default {
-
+    computed: {
+      ...mapGetters({
+        user: 'getUser'
+      })
+    },
+    mounted() {
+      console.log(this.user)
+    }
   }
 </script>
 <style>

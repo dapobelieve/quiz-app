@@ -71,7 +71,6 @@
           this.$router.push({
             name: 'quiz'
           })
-          console.log(response.data)
         })
         .catch(error => {
           console.log(error.response.data)

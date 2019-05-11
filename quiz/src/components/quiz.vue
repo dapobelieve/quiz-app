@@ -6,12 +6,12 @@
           <v-card>
             <v-card-title primary-title class="heading">
               <div>
-                <template v-for="(quiz, index) in newData">
-                  <h4 class="title ">Question {{ pageStart + 1 }}</h4>
-                  <div class="question">
+                <template v-for="(quiz, index) in newData" >
+                  <h4 :key="quiz.id" class="title ">Question {{ pageStart + 1 }}</h4>
+                  <div class="question" :key="quiz.id">
                     {{ quiz.question }}
                   </div>
-                  <div class="options">
+                  <div class="options" :key="quiz.id">
                     <div class="option option-1">
                       <v-card>
                         <input v-model="answers[pageStart]" 
@@ -58,7 +58,7 @@
             </v-card-title>            
           </v-card>
           <div class="submit">
-            <v-btn @click="handleSubmit" color="success">Submit</v-btn>
+            <v-btn @click="handleSubmit" :disabled="btn.state" color="success">{{btn.text}}</v-btn>
           </div>
           <!-- </v-flex> -->
         </v-flex>
@@ -76,17 +76,24 @@
 </template>
 <script>
   import { mapActions, mapGetters } from 'vuex'
-  import axios from 'axios'
   export default {
     data () {
       return {
         pages: 0,
         pageStart: 0,
         answers: [],
-        submit: false
+        submit: false,
+        btn: {
+          state: false,
+          text: 'Submit'
+        }
       }
     },
     computed: {
+      ...mapGetters({
+        user: 'getUser',
+        quiz: 'getQuiz'
+      }),
       newData () {
         if (!this.quiz) 
           return;
@@ -94,15 +101,16 @@
               end   = start + 1
         return this.quiz.slice(start, end);
       },
-      ...mapGetters({
-        user: 'getName',
-        quiz: 'getQuiz'
-      })
+      
     },
     methods: {
+      toggle () {
+        this.btn.state = !this.btn.state
+      },
       ...mapActions({
         getQuestions: 'getUserQuestions',
-        setAnswer: 'answerQuestion'
+        setAnswer: 'answerQuestion',
+        submitQuiz: 'submitQuiz'
       }),
       handleChange (e, id) {
         this.setAnswer({
@@ -111,6 +119,8 @@
         })
       },
       handleSubmit () {
+        this.toggle()
+        this.btn.text = 'Processing...'
         let ans = 0;
         this.submit = false
         this.quiz.map(x => {
@@ -120,25 +130,24 @@
             x.hasAnswered = false
           }
         })
-        // if (ans === this.quiz.length) {
-          this.submitQuiz()
-        // }else {
-        //   this.submit = !this.submit
-        //   alert('answer all questions')
-        //   return ;
-        // }
-      },
-      submitQuiz () {
-        axios.post(`${this.$baseUrl}submit`,{
-          answers: this.quiz
-        })
-        .then(response => {
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error.response.data)
-        })
-        console.log("submitting...")
+        if (ans === this.quiz.length) {
+          this.submitQuiz({
+            url: this.$baseUrl,
+            answers: this.quiz,
+            userId: this.$store.state.userData.id
+          })
+          .then(response => {
+            this.$router.replace({
+              name: 'result'
+            })
+          })
+        }else {
+        this.btn.text = 'Submit'
+        this.toggle()
+          this.submit = !this.submit
+          alert('The questions tagged in red have not been answered')
+          return ;
+        }
       }
     },
     mounted () {
@@ -151,7 +160,7 @@
     created () {
       this.getQuestions({
         url: this.$baseUrl,
-        N: this.user.quiz.count
+        N: this.$store.state.userData.quiz.count
       })
     }
   }
