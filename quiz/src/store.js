@@ -29,6 +29,16 @@ export default new Vuex.Store({
     commitQuiz(state, data) {
         state.answers = data
         localStorage.setItem('quiz', JSON.stringify(data))
+    },
+    answerQuestion(state, {id, answer}) {
+        state.answers.map(x => {
+            if (x.id === id) {
+                x['choice'] = answer;
+                x.hasAnswered = true;
+            }
+        })
+        
+        localStorage.setItem('quiz', JSON.stringify(state))
     }
   },
   actions: {
@@ -46,22 +56,24 @@ export default new Vuex.Store({
                     return Promise.reject(error)
                 })
     },
-
-    getUserQuestions({commit}, {url}) {
-        return axios.get(`${url}get-quiz`)
+    getUserQuestions({commit}, {url, N}) {
+        return axios.get(`${url}get-quiz/${N}`) //N : number of users selected questions
                 .then(response => {
                     //commit to state
-                    commit('commitQuiz', response.data.quiz)
+                    commit('commitQuiz', response.data.selected)
                     return Promise.resolve(true)
                 }).
                 catch(error => {
                     return Promise.reject(error)
                 })
+    },
+    answerQuestion({commit}, {id, answer}) {
+        commit('answerQuestion', {id, answer})
     }
   },
   getters: {
     getName (state) {
-        return state.userData.name
+        return state.userData
     },
     getQuiz (state) {
         return state.answers

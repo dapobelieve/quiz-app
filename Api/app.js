@@ -57,28 +57,48 @@ app.post('/api/v1/create-user', (req, res) => {
 })
 
 //get quiz questions
-app.get('/api/v1/get-quiz', (req, res) => {
+app.get('/api/v1/get-quiz/:n', (req, res) => {
+    const N = parseInt(req.params.n);
     //open queestions.json and retrieve quiz
     fs.readFile(QUE, (err, data) => {
         let obj = JSON.parse(data)
         let quiz = obj.questions
 
-        return res.status(200)
+        let shuffled = quiz.sort(() => 0.5 - Math.random());
+        let selected = shuffled.slice(0, N);
+
+      return res.status(200)
                 .send({
                     success: true,
                     message: "Questions Set",
-                    quiz
+                    selected
                 })
 
     })
-
-    
 })
 
-//get quiz questions
+//process results and compute answers
+app.post('/api/v1/submit', (req, res) => {
+    let answers = req.body.answers;
+    let numberOfQuestions = answers.length;
+    let score = 0;
+
+    answers.map(x => {
+        if(x.choice === x.answer)
+            score++;
+    });
+
+    let percentage = ((score / numberOfQuestions) * 100);
+
+    console.log(percentage.toFixed(1));
+
+})
+
+
+
 
 const PORT = 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+    console.log(`Server✔✨✨✨ on port ${PORT}`)
 })
