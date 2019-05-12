@@ -2,92 +2,92 @@
     "questions":[
         {
             "id": 1,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "Who is thanos",
+            "A": " a villian",
+            "B": "Iron man is thanos",
+            "C": "No idea",
+            "D": "All of the above",
+            "answer": "A"
         },
         {
             "id": 2,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "Which day is Democracy day",
+            "B": "June 12",
+            "A": "May 29",
+            "C": "December 22",
+            "D": "July 17",
+            "answer": "B"
         },
         {
             "id": 3,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "How many states are in Nigeria",
+            "A": "37",
+            "B": "40",
+            "C": "36",
+            "D": "32",
+            "answer": "C"
         },
         {
             "id": 4,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "What is the name of the planet that Thanos has settled on?",
+            "A": "Titan 2",
+            "B": "Thanos Land",
+            "C": "Infinity Planet",
+            "D": "Pluto",
+            "answer": "A"
         },
         {
             "id": 5,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "What does Thanos do in the comics after the snap?",
+            "A": "He settled down and became a farmer",
+            "B": "Destroyed the universe",
+            "C": "He went out to kill all heroes",
+            "D": "Played the saxophone 🎷",
+            "answer": "A"
         },
         {
             "id": 6,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "What percentage of living things did Thanos kill in the snap on earth?",
+            "A": "20%",
+            "B": "70%",
+            "C": "50%",
+            "D": "1%",
+            "answer": "C"
         },
         {
             "id": 7,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "What heroes do we know are alive on earth after the snap?",
+            "A": "Thor, Bruce Banner (Hulk), Black Widow, Captain America, Rocket, War Machine",
+            "B": "Ant Man, Luis, Hank Pym",
+            "C": "Star Lord, Gamora, Falcon, Korg",
+            "D": "Mr. Fantastic, Valkyrie",
+            "answer": "A"
         },
         {
             "id": 8,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
-            "answer": "D"
+            "question": "Who is the woman in the picture in Captain America's Compass?",
+            "A": "Peggy Carter",
+            "B": "Carol Danvers",
+            "C": "Natasha Romanoff",
+            "D": "Carol Danvers",
+            "answer": "A"
         },
         {
             "id": 9,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
+            "question": "Why was Tony talking to his scarred Iron Man helmet?",
+            "A": "Recording a message for Pepper Potts",
+            "B": "He's another Kylo Ren",
+            "C": "He's gone crazy",
+            "D": "Contacting help from Cap",
             "answer": "D"
         },
         {
             "id": 10,
-            "question": "JSON name/value pair is written as",
-            "A": "name’ : ‘value’",
-            "B": "name = ‘value’",
-            "C": "name = “value”",
-            "D": "“name” : “value”",
+            "question": "How long had Tony Stark been without water and food for on the banatar with?",
+            "A": "None, he has food and water",
+            "B": "4 days",
+            "C": "10 days",
+            "D": "He has water but no food",
             "answer": "D"
         }
     ]

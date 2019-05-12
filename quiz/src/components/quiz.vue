@@ -6,7 +6,7 @@
           <v-card>
             <v-card-title primary-title class="heading">
               <div>
-                <template v-for="(quiz, index) in newData" >
+                <span v-for="(quiz, index) in newData" >
                   <h4 :key="quiz.id" class="title ">Question {{ pageStart + 1 }}</h4>
                   <div class="question" :key="quiz.id">
                     {{ quiz.question }}
@@ -49,13 +49,11 @@
                       </v-card>                    
                     </div>
                   </div>
-                </template>
-                <template>
-                  <div class="controls">
-                    <v-btn dark :disabled="pageStart == 0" @click="pageStart -= 1" >Prev</v-btn>
-                    <v-btn dark :disabled="pageStart >= pages - 1" @click="pageStart += 1" >Next</v-btn>
-                  </div>
-                </template>
+                </span>
+                <div class="controls">
+                  <v-btn dark :disabled="pageStart == 0" @click="pageStart -= 1" >Prev</v-btn>
+                  <v-btn dark :disabled="pageStart >= pages - 1" @click="pageStart += 1" >Next</v-btn>
+                </div>
               </div>              
             </v-card-title>            
           </v-card>
