@@ -1,5 +1,5 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+const express =  require('express');
+const bodyParser = require('body-parser');
 const fs = require('fs')
 var cors = require('cors')
 const app = express();
@@ -44,7 +44,9 @@ app.post('/api/v1/create-user', (req, res) => {
 
         obj = JSON.stringify(obj)
 
-        fs.writeFile(ANS, obj, 'utf8')
+        fs.writeFile(ANS, obj, 'utf8', function(err) {
+            if (err) console.log('Serios Error here!!!');
+        })
          
         
         res.status(201).send({
@@ -106,7 +108,9 @@ app.post('/api/v1/submit', (req, res) => {
       })
 
       obj = JSON.stringify(obj)
-      fs.writeFile(ANS, obj, 'utf8');
+      fs.writeFile(ANS, obj, 'utf8', function(err) {
+            if (err) console.log('Serious Error here!!!');
+        });
       
       return res.status(200)
                 .send({
@@ -124,6 +128,6 @@ app.post('/api/v1/submit', (req, res) => {
 
 const PORT = 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server✔✨✨✨ on port ${PORT}`)
-})
+app.listen(process.env.PORT || 5000, function(){
+    console.log('Your node js server is running');
+});

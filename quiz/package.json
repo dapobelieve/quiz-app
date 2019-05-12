@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
     "start": "node server.js",
-    "build": "node build/build.js",
-    "lint": "vue-cli-service lint",
-    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi "    
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"        
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -27,5 +27,8 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.5.21"
+  },
+  "engines": {
+    "node": "8.12"
   }
 }

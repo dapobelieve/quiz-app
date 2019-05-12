@@ -50,10 +50,12 @@
                     </div>
                   </div>
                 </template>
-                <div class="controls">
-                  <v-btn dark :disabled="pageStart == 0" @click="pageStart -= 1" >Prev</v-btn>
-                  <v-btn dark :disabled="pageStart >= pages - 1" @click="pageStart += 1" >Next</v-btn>
-                </div>
+                <template>
+                  <div class="controls">
+                    <v-btn dark :disabled="pageStart == 0" @click="pageStart -= 1" >Prev</v-btn>
+                    <v-btn dark :disabled="pageStart >= pages - 1" @click="pageStart += 1" >Next</v-btn>
+                  </div>
+                </template>
               </div>              
             </v-card-title>            
           </v-card>
