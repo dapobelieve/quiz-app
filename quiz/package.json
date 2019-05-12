@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "node build",
+    "start": "node server.js",
+    "build": "node build/build.js",
     "lint": "vue-cli-service lint",
-    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
-    "start": "node server.js"
+    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi "    
   },
   "dependencies": {
     "axios": "^0.18.0",
